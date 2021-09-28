@@ -1,0 +1,5 @@
+- name: Install docker and docker-compose
+  import_playbook: /home/ayush/ansible/bitcoin/docker.yml
+- name: Setup bitcoin node
+  import_playbook: /home/ayush/ansible/bitcoin/bitcoin.yml
+
