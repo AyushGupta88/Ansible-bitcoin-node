@@ -5,12 +5,12 @@
   tasks:
     - name: Creates directory
       file:
-        path: /home/ubuntu/opt/btc/
+        path: /opt/btc/
         state: directory      
     - name: Copy dockerfile, docker-compose files, wallet.sh, bitcoin.conf
       copy:    
         src: '{{item}}'
-        dest: '/home/ubuntu/opt/btc/'
+        dest: '/opt/btc/'
         owner: root
         group: root
         mode: 0644
@@ -21,4 +21,4 @@
         - /home/ayush/ansible/bitcoin/btc/btc-docker-compose.yml 
     - name: Start bitcoin node using docker-compose up
       command:
-        cmd:  docker-compose -f /home/ubuntu/opt/btc/btc-docker-compose.yml up -d 
+        cmd:  docker-compose -f /opt/btc/btc-docker-compose.yml up -d 
