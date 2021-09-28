@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  bitcoin:
+    build: .
+    restart: always
+    networks:
+      - "bitcoin"
+    volumes:
+      - ./data/bitcoin:/root/.bitcoin
+      - ./bitcoin.conf:/root/.bitcoin/bitcoin.conf
+      - ./wallet.sh:/root/.bitcoin/wallet.sh
+    ports:
+      - "8333:8333"
+      - "8332:8332"
+      - "18333:18333"
+      - "18332:18332"
+
+networks:
+  bitcoin:
+    driver: bridge

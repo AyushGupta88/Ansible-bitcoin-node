@@ -1,0 +1,24 @@
+- hosts: ec21
+  become: true
+  #gather_facts: false  
+  name: Bitcoin node setup
+  tasks:
+    - name: Creates directory
+      file:
+        path: /home/ubuntu/opt/btc/
+        state: directory      
+    - name: Copy dockerfile, docker-compose files, wallet.sh, bitcoin.conf
+      copy:    
+        src: '{{item}}'
+        dest: '/home/ubuntu/opt/btc/'
+        owner: root
+        group: root
+        mode: 0644
+      loop:
+        - /home/ayush/ansible/bitcoin/btc/bitcoin.conf
+        - /home/ayush/ansible/bitcoin/btc/Dockerfile
+        - /home/ayush/ansible/bitcoin/btc/wallet.sh
+        - /home/ayush/ansible/bitcoin/btc/btc-docker-compose.yml 
+    - name: Start bitcoin node using docker-compose up
+      command:
+        cmd:  docker-compose -f /home/ubuntu/opt/btc/btc-docker-compose.yml up -d 
